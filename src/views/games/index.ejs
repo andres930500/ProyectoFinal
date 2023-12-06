@@ -1,0 +1,62 @@
+<%- include('../layouts/header', { title: 'books list' }); -%>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <br>
+            <h1 class="alert alert-primary text-center">Lista de Productos</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-12 d-grid">
+            <a class="btn btn-primary" href="/games/create" role="button">Ingresar un nuevo Juego</a>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12 d-grid">
+            <a class="btn btn-primary" href="/games/admin/orders" role="button">Ver Pedidos</a>
+        </div>
+    </div>
+    <br>
+
+    <% for (let i = 0; i < games.length; i += 3) { %>
+        <div class="row">
+            <% for (let j = i; j < i + 3 && j < games.length; j++) { %>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="<%= games[j].coverImageUrl %>" class="card-img-top img-fluid mx-auto d-block" alt="<%= games[j].title %>" style="width: 180px; height: 250px; object-fit: cover; margin-top: 10px;">
+                        <div class="card-body text-center">
+                            <h5 class="card-title"><%= games[j].title %></h5>
+                            <p class="card-text">Género: <%= games[j].genre %></p>
+                            <p class="card-text">Plataforma: <%= games[j].compatiblePlatform %></p>
+                            <p class="card-text">Modos de Juego: <%= games[j].gameModes %></p>
+                            <p class="card-text">Precio: <%= games[j].price %></p>
+                            <p class="card-text">Lenguaje: <%= games[j].language %></p>
+                            <form action="/games/delete/<%= games[j].id %>" method="post" onsubmit="return confirm('Are you sure you want to delete this game?')">
+                                <button type="submit" class="btn btn-outline-danger btn border-2 ">Eliminar</button>
+                                <a class="btn btn-outline-primary btn border-2" href="/games/edit/<%= games[j].id %>" role="button">Editar</a>
+                            </form>
+                           
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    <% } %>
+    
+
+    
+</div>
+
+<%- include('../layouts/footer'); -%>
+
+<%- include('../layouts/footer'); -%>
+
+
+
+
+
+

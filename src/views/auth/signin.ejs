@@ -1,0 +1,28 @@
+<%- include('../layouts/header', {title: 'Sign In'}); -%>
+
+<div class="container d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title alert alert-primary text-center">Login</h1>
+
+            <form action="/auth/signin" method="post" class="row g-3">
+                <div class="col-12">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" name="username" id="username" class="form-control" placeholder="Ingrese usuario" required>
+                </div>
+                <div class="col-12">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Ingrese Contreña" required>
+                </div>
+                <div class="col-12 d-grid mt-4">
+                    <button type="submit" class="btn btn-outline-primary">Login</button>
+                    <br>
+                    <button type="button" class="btn btn-outline-primary" onclick="window.location.href='/auth/signup'">Crear Administrador</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('../layouts/footer'); -%>

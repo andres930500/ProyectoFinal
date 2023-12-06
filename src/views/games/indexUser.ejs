@@ -1,0 +1,168 @@
+<%- include('../layouts/header', { title: 'books list' }); -%>
+
+
+<div class="container"><div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+
+    <section class="w-75 mx-auto text-center my-5" id="intro">
+        <h1 class="p-3 fs-2 border-top border-3"><span class="text-primary">Bienvenido a nuestra tienda de videojuegos</span></h1>
+        <p class="text-primary">Descubre una amplia selección de los mejores videojuegos.</p>
+
+        <div class="carousel-inner" >
+            <div class="carousel-item active " data-bs-interval="4000">
+              <img src="/static/img/img3.png " class="d-block w-100" alt="slide1">
+            </div>
+            
+            <div class="carousel-item" data-bs-interval="4000">
+              <img src="/static/img/img1.jpg" class="d-block w-100" alt="slide3">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>  
+        <div class="container"><div class="row"><div class="col-12"><h1 class="alert alert-success text-center">Juegos Disponibles</h1></div></div></div>
+
+        <div class="container">
+            <% for (let i = 0; i < games.length; i += 3) { %>
+                <div class="row">
+                    <% for (let j = i; j < i + 3 && j < games.length; j++) { %>
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <img src="<%= games[j].coverImageUrl %>" class="card-img-top img-fluid mx-auto d-block"
+                                    alt="<%= games[j].title %>"
+                                    style="width: 180px; height: 250px; object-fit: cover; margin-top: 10px;">
+                                <div class="card-body text-left">
+                                    <h5 class="card-title">
+                                        <%= games[j].title %>
+                                    </h5>
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Género</th>
+                                                <td><%= games[j].genre %></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Plataforma</th>
+                                                <td><%= games[j].compatiblePlatform %></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Modos de Juego</th>
+                                                <td><%= games[j].gameModes %></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Precio</th>
+                                                <td><%= games[j].price %></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Lenguaje</th>
+                                                <td><%= games[j].language %></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+        
+                                    <div class="d-flex justify-content-center mt-3">
+                                        <button type="button" class="btn btn-primary btn-add-to-cart"
+                                            data-game-id="<%= games[j].id %>">
+                                            Añadir al carrito
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            <% } %>
+        </div>
+        
+        
+
+        <section class="container">
+            <div class="row w-75 mx-auto my-5">
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4 text-center">
+                    <div class="card">
+                        <img src="static/img/ps4.png" class="card-img-top img-fluid rounded" alt="PS4">
+                        <div class="card-body">
+                            <h3 class="card-title fs-5 mb-3">PlayStation 4</h3>
+                            <p class="card-text">Tenemos todos mejores títulos para PlayStation 4.</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4 text-center">
+                    <div class="card">
+                        <img src="static/img/nintendo.png" class="card-img-top img-fluid rounded" alt="Nintendo">
+                        <div class="card-body">
+                            <h3 class="card-title fs-5 mb-3">Nintendo</h3>
+                            <p class="card-text"> colección de juegos para Nintendo.</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-4 text-center">
+                    <div class="card">
+                        <img src="static/img/xbox.png" class="card-img-top img-fluid rounded" alt="Xbox">
+                        <div class="card-body">
+                            <h3 class="card-title fs-5 mb-3">Xbox</h3>
+                            <p class="card-text">selección de juegos para la consola Xbox.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+       
+</section>
+   
+</div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+<%- include('../layouts/footer'); -%>
+
+
+        <!-- ... tu código actual ... -->
+
+        <%- include('../layouts/footer'); -%>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    const addToCartButtons = document.querySelectorAll('.btn-add-to-cart');
+
+                    addToCartButtons.forEach(button => {
+                        button.addEventListener('click', async () => {
+                            const gameId = button.dataset.gameId;
+                            try {
+                                const response = await fetch(`/store/add-to-cart/${gameId}`, { method: 'POST' });
+                                const result = await response.json();
+                                if (result.success) {
+                                    alert('Producto añadido al carrito');
+                                } else {
+                                    alert('Error al añadir al carrito');
+                                }
+                            } catch (error) {
+                                console.error('Error:', error);
+                            }
+                        });
+                    });
+                });
+            </script>

@@ -1,0 +1,52 @@
+<%- include('../layouts/header', { title: 'Crear nuevo Juego' }); -%>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="alert alert-success text-center">Ingresar un nuevo juego</h1>
+        </div>
+    </div>
+    <div class="row">
+        <form action="/games" method="post" class="row">
+            <div class="col-6">
+                <label for="title" class="form-label">Título</label>
+                <input type="text" name="title" id="title" class="form-control" required>
+            </div>
+            <div class="col-6">
+                <label for="genre" class="form-label">Género</label>
+                <input type="text" name="genre" id="genre" class="form-control" required>
+            </div>
+            <div class="col-6">
+                <label for="compatiblePlatform" class="form-label">Plataforma Compatible</label>
+                <input type="text" name="compatiblePlatform" id="compatiblePlatform" class="form-control" required>
+            </div>
+            <div class="col-6">
+                <label for="gameModes" class="form-label">Modos de Juego</label>
+                <input type="text" name="gameModes" id="gameModes" class="form-control" required>
+            </div>
+            <div class="col-6">
+                <label for="price" class="form-label">Precio</label>
+                <input type="number" name="price" id="price" class="form-control" required>
+            </div>
+            <div class="col-6">
+                <label for="coverImageUrl" class="form-label">URL de la Carátula</label>
+                <input type="text" name="coverImageUrl" id="coverImageUrl" class="form-control" required>
+            </div>
+            <!-- Agrega aquí el campo 'language' -->
+            <div class="col-6">
+                <label for="language" class="form-label">Idioma</label>
+                <input type="text" name="language" id="language" class="form-control">
+            </div>
+            <!-- Fin del campo 'language' -->
+            <div class="col-12 d-grid mt-4">
+                <button type="submit" class="btn btn-success">Ingresar Juego</button>
+            </div>
+        </form>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12 d-grid">
+            <a class="btn btn-primary" href="/games" role="button">Ver Lista de Juegos</a>
+        </div>
+    </div>
+</div>
+
+<%- include('../layouts/footer'); -%>

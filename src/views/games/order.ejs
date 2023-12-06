@@ -1,0 +1,36 @@
+<%- include('../layouts/header', { title: 'Lista de Pedidos' }); -%>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <br>
+            <h1 class="alert alert-primary text-center">Lista de Pedidos</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <% orders.forEach(order => { %>
+            <div class="col-md-6 mb-4">
+                <div class="card bg-primary text-white"> <!-- Agregada la clase bg-primary y text-white -->
+                    <div class="card-body">
+                        <h5 class="card-title">Pedido ID: <%= order.id %></h5>
+                        <p class="card-text">Cliente: <%= order.name %> <%= order.lastName %></p>
+                        <p class="card-text">Total: $<%= order.total.toFixed(2) %></p>
+
+                        <ul class="list-group">
+                            <% order.productos.forEach(producto => { %>
+                                <li class="list-group-item">
+                                    Producto ID: <%= producto.id %><br>
+                                    Título: <%= producto.title %><br>
+                                    Precio: $<%= producto.price.toFixed(2) %>
+                                </li>
+                            <% }); %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>
+
+<%- include('../layouts/footer'); -%>
